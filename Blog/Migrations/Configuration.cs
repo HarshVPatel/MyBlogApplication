@@ -68,7 +68,7 @@ namespace Blog.Migrations
                 moderator.UserName = "h.patel405.hp@gmail.com";
                 moderator.Email = "h.patel405.hp@gmail.com";
                 moderator.FirstName = "Harsh";
-                moderator.LastName = "Patel";
+                moderator.LastName = "Patel";  
                 moderator.DisplayName = "Harsh";
 
                 userManager.Create(moderator, "HarshXyZ@12");
