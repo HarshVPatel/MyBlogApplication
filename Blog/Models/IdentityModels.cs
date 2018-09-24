@@ -46,6 +46,6 @@ namespace Blog.Models
 
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public IEnumerable ApplicationUsers { get; internal set; }
+        
     }
 }

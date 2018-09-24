@@ -36,7 +36,9 @@ namespace Blog.Migrations
             //Check if the admin user is already created.
             //If not, create it.
             ApplicationUser adminUser = null;
+            //If not, add it.
 
+           
             if (!context.Users.Any(p => p.UserName == "admin@myblogapp.com"))
             {
                 adminUser = new ApplicationUser();
@@ -48,7 +50,6 @@ namespace Blog.Migrations
 
                 userManager.Create(adminUser, "Password-1");
             }
-           
             else
             {
                 adminUser = context.Users.Where(p => p.UserName == "admin@myblogapp.com")
@@ -56,35 +57,38 @@ namespace Blog.Migrations
             }
 
             //Check if the adminUser is already on the Admin role
-            //If not, add it.
             if (!userManager.IsInRole(adminUser.Id, "Admin"))
             {
                 userManager.AddToRole(adminUser.Id, "Admin");
             }
+
             ApplicationUser moderator = null;
+
             if (!context.Users.Any(p => p.UserName == "h.patel405.hp@gmail.com"))
             {
                 moderator = new ApplicationUser();
                 moderator.UserName = "h.patel405.hp@gmail.com";
                 moderator.Email = "h.patel405.hp@gmail.com";
                 moderator.FirstName = "Harsh";
-                moderator.LastName = "Patel";  
+                moderator.LastName = "Patel";
                 moderator.DisplayName = "Harsh";
 
                 userManager.Create(moderator, "HarshXyZ@12");
             }
             else
             {
-                adminUser = context.Users.Where(p => p.UserName == "h.patel405.hp@gmail.com")
+                moderator = context.Users.Where(p => p.UserName == "h.patel405.hp@gmail.com")
                     .FirstOrDefault();
             }
-            
+
             //Check if the adminUser is already on the Admin role
             //If not, add it.
+
             if (!userManager.IsInRole(moderator.Id, "Moderator"))
             {
                 userManager.AddToRole(moderator.Id, "Moderator");
             }
+
         }
     }
 }
