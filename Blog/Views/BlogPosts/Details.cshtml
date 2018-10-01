@@ -72,8 +72,43 @@
 
     </dl>
 </div>
+<div>
+    Comments:
+    @foreach (var comment in Model.Comments)
+    {
+        <p>
+            @comment.Body - by @comment.Author.DisplayName - @comment.Created.ToString("dd/MM/yyyy HH:mm")
+        </p>
+        if (User.Identity.IsAuthenticated &&
+            (User.IsInRole("Admin") || User.IsInRole("Moderator")))
+        {
+            <a href="@Url.Action("Edit", "Comments", new { id = comment.Id } )">Edit</a>
+            <a href="@Url.Action("Delete", "Comments", new { id = comment.Id })">Delete</a>
+        }
+    }
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        Submit your comment!
+    </div>
+    <div>
+        @using (Html.BeginForm("DetailsSlug", "BlogPosts", FormMethod.Post))
+        {
+            <textarea name="Body"></textarea>
+            <input type="hidden" name="slug" value="@Model.Slug" />
+
+            if (ViewBag.ErrorMessage != null)
+            {
+                <span>@ViewBag.ErrorMessage</span>
+            }
+            <input type="submit" value="Submit" />
+        }
+    </div>
+}
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-

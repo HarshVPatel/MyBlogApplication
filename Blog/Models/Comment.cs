@@ -13,6 +13,7 @@ namespace Blog.Controllers
         public int PostId { get; set; }
 
         public string AuthorId { get; set; }
+        public virtual ApplicationUser Author { get; set; }
 
         public string Body { get; set; }
 
@@ -22,7 +23,7 @@ namespace Blog.Controllers
 
         public string UpdateReason { get; set; }
 
-        public virtual ApplicationUser Author { get; set; }
-
+        public int BlogPostId { get; set; }
+        public virtual  BlogPost BlogPost { get; set; }
     }
 }
